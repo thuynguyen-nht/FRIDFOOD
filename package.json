@@ -7,13 +7,14 @@
     "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
-    "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
+    "test": "npm run lint"
   },
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
+    "lint": "^0.7.0",
     "mysql2": "^1.6.5",
     "sequelize": "^5.8.6"
   },
@@ -24,7 +25,7 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.3",
     "prettier": "^1.17.1"
   }
 }
