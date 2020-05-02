@@ -1,10 +1,16 @@
 language: node_js
 node_js: "8"
+services:
+  - mysql
+  - chai
 branches:
   only:
-  - master
+    - master
 cache:
   directories:
     - node_modules
 before_install:
   - mysql -e 'CREATE DATABASE testdb;'
+script:
+  - npm run test
+  - npm run fix
