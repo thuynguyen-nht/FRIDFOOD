@@ -19,8 +19,8 @@ let transporter = nodemailer.createTransport({
 // By using the refreshToken the accessToken will expire sooner or later so when it gets updated this event will trigger
 transporter.on("token", token => {
   console.log("A new access token was generated");
-//   console.log("User: %s", token.user);
-//   console.log("Access Token: %s", token.accessToken);
+  //   console.log("User: %s", token.user);
+  //   console.log("Access Token: %s", token.accessToken);
   accessToken = token.accessToken;
   console.log("Expires: %s", new Date(token.expires));
 });
