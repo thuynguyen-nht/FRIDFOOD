@@ -1,3 +1,43 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+li {
+  margin-left: 40px;
+}
+
+#search-recipes {
+  margin-left: 40px;
+}
+
+.how-fridge-work {
+  color: #fcfbfc;
+}
+
+.centered {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 6vw;
+}
+
+.how-contain {
+  margin-top: 3vw;
+}
+
+#fridge-icon {
+  width: 70%;
+}
+
+.explain {
+  margin: auto;
+}
+
+.bg-pic {
+  background-color: #fcfbfc;
+}
+.icon h4 {
+  text-align: center;
+  color: black;
+}
