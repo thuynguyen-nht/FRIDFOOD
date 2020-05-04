@@ -1,15 +1,15 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "exampledb",
+    "password": "password",
+    "database": "fridgeSearch",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "testdb",
+    "password": "password",
+    "database": "fridgeSearch",
     "host": "localhost",
     "dialect": "mysql",
     "logging": false
