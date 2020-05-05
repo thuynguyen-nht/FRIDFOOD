@@ -33,7 +33,8 @@
       </form>
 
       <li class="nav-item active">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log In</button>
+        <button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#login" type="submit">Log
+          In</button>
       </li>
 
       <li class="nav-item active">
@@ -48,8 +49,8 @@
 
 {{!-- How does it work section --}}
 <div class="how-fridge-work">
-  <img src="../image/jumbotron-howItWork.jpg" class="img-fluid" alt="Responsive image">
-  <h1 class="centered">How does it work?</h1>
+  <img src="../image/jumbotron-howItWork.jpg" class="img-fluid w-100" alt="food combination">
+  <h1 class="centered">How it works?</h1>
 </div>
 
 <div class="container how-contain">
@@ -123,13 +124,106 @@
 
 {{!-- random most popular recipes --}}
 
+<section id="slideshow">
+  <h1>Recommended recipes</h1>
+  <div class="dropdown-divider"></div>
+  <div class="slick">
+    <div class="card mx-3" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>
+    <div class="card mx-3" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>
+    <div class="card mx-3" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>
+    <div class="card mx-3" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>
+    <div class="card mx-3" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>
+    <div class="card mx-3" style="width: 18rem;">
+      <img src="..." class="card-img-top" alt="...">
+      <div class="card-body">
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+          content.</p>
+      </div>
+    </div>
+  </div>
 
+</section>
 
 
 {{!-- end random most popular --}}
 
+{{!-- Contact Us footer --}}
 
+<footer>
+  <div class="container">
 
+    <div class="row">
+      <div class="col row" id="developers">
+        <div class="col">
+          Developers
+        </div>
+        <div class="col side-dev">
+          <a class="row" href="#">Documentation</a>
+          <a class="row" href="#">Tutorial</a>
+        </div>
+      </div>
+
+      <div class="col row" id="follow">
+
+        <div class="col">
+          Follow Us
+        </div>
+        <div class="col">
+          <div class="row  btn-group dropright">
+            <button type="button" class="btn btn-secondary">
+              Github
+            </button>
+            <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropright</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="https://github.com/thuynguyen-nht">Thuy Nguyen</a>
+              <a class="dropdown-item" href="https://github.com/ardelato">Angel de la Torre</a>
+              <a class="dropdown-item" href="https://github.com/atrodondi">Alex R</a>
+              <a class="dropdown-item" href="https://github.com/phquyenle">Phuong Quyen Le</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="text-center">© 2020 FIDFOOD. All rights reserved.</div>
+  </div>
+</footer>
+
+{{!-- End footer --}}
 
 
 

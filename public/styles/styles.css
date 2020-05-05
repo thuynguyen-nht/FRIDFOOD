@@ -1,5 +1,19 @@
-.list-group-item {
-  line-height: 2.5;
+a {
+  display: inline-block;
+  list-style: none;
+  text-decoration: none;
+  color: black;
+  transition: opacity 0.125s linear;
+}
+a :hover {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.125s linear;
+}
+
+a :visited {
+  color: inherit;
+  text-decoration: none;
 }
 
 li {
@@ -16,7 +30,7 @@ li {
 
 .centered {
   position: absolute;
-  top: 20%;
+  top: 12vw;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 6vw;
@@ -37,7 +51,25 @@ li {
 .bg-pic {
   background-color: #fcfbfc;
 }
+
 .icon h4 {
   text-align: center;
   color: black;
+}
+
+#slideshow {
+  margin: auto;
+  margin-top: 30px;
+  padding: 20px;
+  width: 80%;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: red !important;
+}
+
+footer {
+  margin-top: 5em;
+  height: 6em;
 }
