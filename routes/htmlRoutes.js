@@ -11,13 +11,41 @@ module.exports = function(app) {
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
+  // For design purpose only
+  app.get("/main", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("mainPage", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
+  app.get("/fridge", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("myFridge", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
+  // Load main page after log in and pass the id to url
+  app.get("/main/:id", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("mainPage", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+
+  // Load main page after log in and pass the id to url
+  app.get("/main/:id/myFridge", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.render("myFridge", {
+        msg: "Welcome!",
+        examples: dbExamples
       });
     });
   });
