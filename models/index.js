@@ -5,6 +5,8 @@ var path = require("path");
 var Sequelize = require("sequelize");
 var basename = path.basename(module.filename);
 var env = process.env.NODE_ENV || "development";
+var allConfig = require(__dirname + "/../config/config.json");
+console.log(allConfig)
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
@@ -39,4 +41,10 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.recipe = require("../models/recipe.js")(sequelize, Sequelize);
+db.ingredient = require("../models/ingredients.js")(sequelize, Sequelize);
+db.recipeIngredient = require("../models/recipeingredient.js")(sequelize, Sequelize);
+
+db.recipe.belongsToMany(db.ingredient, {as: "Ingredients", through: "recipe_ingredient"});
+db.ingredient.belongsToMany(db.recipe, {as: "Recipes", through: "recipe_ingredient"});
 module.exports = db;

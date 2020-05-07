@@ -1,6 +1,10 @@
 // dependencies
 var mysql = require("mysql");
-
+var Sequelize = require("sequelize");
+var sequelize = new Sequelize("fridgeSearch", "root", "password", {
+  host: "localhost",
+  dialect: "mysql"
+});
 // connection that we can export to other files
 var connection;
 
@@ -11,8 +15,8 @@ if (process.env.JAWSDB_URL) {
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "4153FFSQLPW",
-    database: "burgers_db"
+    password: "password",
+    database: "fridgeSearch"
   });
 }
 
