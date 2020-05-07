@@ -7,7 +7,7 @@
     "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
-    "test": "npm run lint"
+    "test": "mocha"
   },
   "license": "ISC",
   "dependencies": {

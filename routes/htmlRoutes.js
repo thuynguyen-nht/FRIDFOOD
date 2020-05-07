@@ -21,6 +21,7 @@ module.exports = function(app) {
     });
   });
 
+  // For design purpose only
   app.get("/fridge", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       res.render("myFridge", {
