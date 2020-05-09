@@ -9,16 +9,16 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="../main">Home</a>
+        <a class="nav-link" href="/main">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="../main">How it works</a>
+        <a class="nav-link" href="/main">How it works</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">My Recipes</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="../myFridge">My fridge</a>
+        <a class="nav-link" href="/fridge">My fridge</a>
       </li>
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -58,26 +58,26 @@
 </div>
 
 <div class="container mt-5">
-  <div class="card fridgeInv">
+  <div class="card">
     <h4 class="card-header">Add New Ingredients:</h4>
     <div class="card-body">
 
-      <form class="row form-inline">
+      <form class="row form-inline inv-form">
         <div class="col-md-5 form-group">
-          <label for="search" class="col-sm col-form-label">New Ingredients:</label>
+          <label for="ingredientSearch" class="col-sm col-form-label">New Ingredients:</label>
           <input class="form-control col-sm mr-sm" type="search" placeholder="Search Ingredients" aria-label="Search"
-            name="search" id="search">
+            name="ingredientSearch" id="ingredientSearch">
           <ul class="list-group" id="result"></ul>
         </div>
         <div class="col-md-5 form-group">
-          <label for="qty" class="col-sm col-form-label">Quantity:</label>
+          <label for="quantity" class="col-sm col-form-label">Quantity:</label>
           <input class="form-control col-sm mr-sm" type="text" placeholder="Enter quantity" aria-label="quantity"
             name="quantity" id="quantity">
           <div class="form-group">
             <select class="form-control" id="units">
-              <option>each</option>
-              <option>ounce</option>
-              <option>mL</option>
+              <option value="1">each</option>
+              <option value="2">ounce</option>
+              <option value="3">mL</option>
             </select>
           </div>
         </div>
@@ -86,15 +86,34 @@
 
     </div>
   </div>
+
   <div class="card fridgeInv mt-5">
-    <h4 class="card-header">My fridge inventory:</h4>
-    <div class="card-body" id="displayInv">
+    <div class="card-header">
+      <div class="row">
+        <h4 class="col">My fridge inventory:</h4>
+        <button type="button" class="btn btn-info col" id="matchingRecipes">Find Recipes</button>
+      </div>
+
+    </div>
+
+    {{!-- user inventory will be displayed here --}}
+    <div class="card-body" id="displayIngredients">
 
 
     </div>
   </div>
 
+  {{!-- Commenting this because it should be render, not a hardcode --}}
+  {{!-- <div class="card fridgeInv mt-5">
+    <h4 class="card-header">Suggested recipes based on your inventory</h4>
 
+
+    {{!-- possible recipes will be displayed here --}}
+  <div class="card-body" id="possibleRecipes">
+
+
+  </div> --}}
+</div>
 </div>
 
 {{!-- End my fridge section --}} {{!-- random most popular recipes --}} <section id="slideshow">
