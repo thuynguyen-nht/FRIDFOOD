@@ -33,6 +33,7 @@ $(document).ready(() => {
     $("#signUp").on("submit", function(event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
+      console.log("sign up clicked");
       if (
         !$("#firstName")
           .val()
@@ -43,7 +44,7 @@ $(document).ready(() => {
         !$("#inputEmail")
           .val()
           .trim() ||
-        $("#inputPassword")
+        !$("#inputPassword")
           .val()
           .trim()
       ) {
@@ -67,13 +68,13 @@ $(document).ready(() => {
       console.log(newUser);
 
       // Send the POST request.
-      $.ajax("_________", {
+      $.ajax("/api/user", {
         type: "POST",
         data: newUser
       }).then(function() {
         console.log("created new user");
         // Reload the page to get the updated list
-        window.location.href = "/mainPage";
+        // window.location.href = "/mainPage";
       });
     });
 

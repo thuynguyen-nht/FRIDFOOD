@@ -29,7 +29,7 @@ function signUp(signupEmail, signupPassword) {
     .createUserWithEmailAndPassword(signupEmail, signupPassword)
     .then(function(result) {
       console.log(result.user.uid);
-      return result.user.id;
+      return result.user.uid;
     })
     .catch(function(error) {
       // Handle Errors here.
@@ -44,7 +44,7 @@ function login(loginEmail, loginPassword) {
     .signInWithEmailAndPassword(loginEmail, loginPassword)
     .then(function(result) {
       console.log(result.user.uid);
-      return result.user.id;
+      return result.user.uid;
     })
     .catch(function(error) {
       // Handle Errors here.
