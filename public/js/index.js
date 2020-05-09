@@ -1,8 +1,8 @@
 $(document).ready(() => {
-  $(".nav-link").on("click", function(event) {
+  $(".page-links").on("click", function() {
     var pathName = window.location.pathname;
-    var link = $(this).attr("href");
-    $(this).attr("href") = pathName + link;
+    console.log($(this).attr("id"));
+    window.location.href = pathName + "/" + $(this).attr("id");
   });
   $(".slick").slick({
     autoplay: true,
@@ -38,6 +38,10 @@ $(document).ready(() => {
     $("#signUp").on("submit", function(event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
+
+      $("#errorEmailSignup").text("");
+      $("#errorPasswordSignup").text("");
+
       console.log("sign up clicked");
       if (
         !$("#firstName")
@@ -123,15 +127,18 @@ $(document).ready(() => {
       $.ajax("/api/user", {
         type: "GET",
         data: logInInfo
-      }).then(function(res) {
+      }).then(function(result) {
         // if(typeof response === [Object])
-        if (res.body.loginEmail && res.body.loginPassword) {
-          console.log("Welcome back, ", id);
-          // Reload the page to get the updated list
-          window.location.href = "/main/";
+        if (typeof result === "object") {
+          if (result.type === "email") {
+            console.log(result.message);
+            $("#errorEmail").text(result.message);
+          } else if (result.type === "password") {
+            $("#errorPassword").text(result.message);
+          }
         } else {
-          console.log("Incorrect Email or Password");
-          $("#errorPassword").append("Incorrect Email or Password");
+          //redirect
+          window.location.href = "/main/" + result;
         }
       });
     });

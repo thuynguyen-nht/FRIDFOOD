@@ -9,7 +9,7 @@ module.exports = function(app) {
     console.log(req.query);
     userAuth.login(req.query.loginEmail, req.query.loginPassword);
     // once you get unique ID from firebase, query DB to get all info where userID is that uniqe id, but it will be placed in DB by sign up function
-    USER.findall({
+    db.User.findall({
       where: {
         UserId: res
       }
