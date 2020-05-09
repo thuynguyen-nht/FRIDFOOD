@@ -1,4 +1,9 @@
 $(document).ready(() => {
+  $(".nav-link").on("click", function(event) {
+    var pathName = window.location.pathname;
+    var link = $(this).attr("href");
+    $(this).attr("href") = pathName + link;
+  });
   $(".slick").slick({
     autoplay: true,
     autoplaySpeed: 1000,
@@ -71,8 +76,21 @@ $(document).ready(() => {
       $.ajax("/api/user", {
         type: "POST",
         data: newUser
-      }).then(function() {
+      }).then(function(result) {
         console.log("created new user");
+        console.log(result);
+        //Error creating user
+        if (typeof result === "object") {
+          if (result.type === "email") {
+            console.log(result.message);
+            $("#errorEmailSignup").text(result.message);
+          } else if (result.type === "password") {
+            $("#errorPasswordSignup").text(result.message);
+          }
+        } else {
+          //redirect
+          window.location.href = "/main/" + result;
+        }
         // Reload the page to get the updated list
         // window.location.href = "/mainPage";
       });
@@ -110,7 +128,7 @@ $(document).ready(() => {
         if (res.body.loginEmail && res.body.loginPassword) {
           console.log("Welcome back, ", id);
           // Reload the page to get the updated list
-          window.location.href = "/mainPage";
+          window.location.href = "/main/";
         } else {
           console.log("Incorrect Email or Password");
           $("#errorPassword").append("Incorrect Email or Password");

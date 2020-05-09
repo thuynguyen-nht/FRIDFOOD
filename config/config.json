@@ -1,22 +1,14 @@
 {
   "development": {
     "username": "root",
-<<<<<<< HEAD
-    "password": "4153FFSQLPW",
-=======
-    "password": "password",
->>>>>>> 6a39ad19ac8e97226aabe2625d8f5b0f016e3a35
+    "password": "Nak09Nak27",
     "database": "fridgeSearch",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-<<<<<<< HEAD
-    "password": "4153FFSQLPW",
-=======
-    "password": "password",
->>>>>>> 6a39ad19ac8e97226aabe2625d8f5b0f016e3a35
+    "password": "Nak09Nak27",
     "database": "fridgeSearch",
     "host": "localhost",
     "dialect": "mysql",
