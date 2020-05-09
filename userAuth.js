@@ -48,7 +48,7 @@ function login(loginEmail, loginPassword) {
     })
     .catch(function(error) {
       // Handle Errors here.
-      console.log(error.message);
+      // console.log(error.message);
 
       //If there is an error return an json object with type and error message parameter
       return error.message;
