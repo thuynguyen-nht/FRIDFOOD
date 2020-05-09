@@ -24,7 +24,7 @@ var app = firebase.initializeApp({
 // });
 
 function signUp(signupEmail, signupPassword) {
-  app
+  return app
     .auth()
     .createUserWithEmailAndPassword(signupEmail, signupPassword)
     .then(function(result) {
@@ -39,7 +39,7 @@ function signUp(signupEmail, signupPassword) {
 
 // Will need to trigger this when a user has submitted their login information and will need to pull the email and password fields
 function login(loginEmail, loginPassword) {
-  app
+  return app
     .auth()
     .signInWithEmailAndPassword(loginEmail, loginPassword)
     .then(function(result) {
@@ -48,7 +48,7 @@ function login(loginEmail, loginPassword) {
     })
     .catch(function(error) {
       // Handle Errors here.
-      console.log(error.message);
+      // console.log(error.message);
 
       //If there is an error return an json object with type and error message parameter
       return error.message;
