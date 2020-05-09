@@ -4,15 +4,15 @@
     aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#">FRIDFOOD</a>
+  <a class="navbar-brand" href="/">FRIDFOOD</a>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="/">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">How it works</a>
+        <a class="nav-link" href="/">How it works</a>
       </li>
       <li class="nav-item dropdown active">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -241,13 +241,15 @@
         <form>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <label for="user-email">Email address</label>
+            <input type="email" class="form-control logInInfo" id="user-email" aria-describedby="emailHelp">
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <small id="errorEmail"></small>
           </div>
           <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <label for="user-password">Password</label>
+            <input type="password" class="form-control logInInfo" id="user-password">
+            <small id="errorPassword"></small>
           </div>
           <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -279,17 +281,17 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="firstName">First Name</label>
-              <input type="text" class="form-control" id="firstName">
+              <input type="text" class="form-control" id="firstName" required>
             </div>
             <div class="form-group col-md-6">
               <label for="lastName">Last Name</label>
-              <input type="text" class="form-control" id="lastName">
+              <input type="text" class="form-control" id="lastName" required>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputEmail">Email</label>
-              <input type="email" class="form-control" id="inputEmail">
+              <input type="email" class="form-control" id="inputEmail" required>
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword">Password</label>
