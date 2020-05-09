@@ -117,5 +117,37 @@ $(document).ready(() => {
         }
       });
     });
+
+    // click add ingredient
+    $("#addIngredient").on("click", function() {
+      event.preventDefault();
+      console.log("add ingredient clicked");
+      if (
+        !$("#ingredientSearch")
+          .val()
+          .trim() ||
+        !$("#quantity")
+          .val()
+          .trim()
+      ) {
+        return;
+      }
+
+      var newIngredient = {
+        newIngredient: $("#ingredientSearch")
+          .val()
+          .trim(),
+        quantity: $("#quantity")
+          .val()
+          .trim(),
+        unit: $("#units").val()
+      };
+      console.log(newIngredient);
+      // post request
+      $.ajax("/api/ingredient", {
+        type: "POST",
+        data: newIngredient
+      });
+    });
   });
 });
