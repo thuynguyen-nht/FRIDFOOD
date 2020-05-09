@@ -105,20 +105,4 @@ $(document).ready(function() {
       url: "/api/fridge/" + id
     }).then(getIngredients);
   }
-
-  //this search is for search box of my fridge where user add their ingredients
-  $("#invSearch").keyup(function() {
-    $("#result").html("");
-    var searchField = $("#invSearch").val();
-    var expression = new RegExp(searchField, "i");
-    $.getJSON("______", function(data) {
-      $.each(data, function(key, value) {
-        if (value.name.search(expression) !== -1) {
-          $("#result").append(
-            "<li class='list-group-item'>" + value.name + "</li>"
-          );
-        }
-      });
-    });
-  });
 });
