@@ -7,15 +7,23 @@ module.exports = function(app) {
   app.get("/api/user", function(req, res) {
     //req stuff
     console.log(req.query);
-    userAuth.login(req.query.loginEmail, req.query.loginPassword);
+    userAuth
+      .login(req.query.loginEmail, req.query.loginPassword)
+      .then(function(result) {
+        if (typeof result === "object") {
+          res.json(result);
+        } else {
+          res.send(result);
+        }
+      });
     // once you get unique ID from firebase, query DB to get all info where userID is that uniqe id, but it will be placed in DB by sign up function
-    USER.findall({
-      where: {
-        UserId: res
-      }
-    }).then(function(result) {
-      console.log(result);
-    });
+    // db.User.findall({
+    //   where: {
+    //     UserId: res
+    //   }
+    // }).then(function(result) {
+    //   console.log(result);
+    // });
   });
 
   // Create a new user
@@ -40,8 +48,8 @@ module.exports = function(app) {
               ingredientCountUnit: ""
             });
           })
-          .then(function(response) {
-            console.log("new user and ingredient table added");
+          .then(function() {
+            res.send(result);
           });
       }
     });
@@ -54,9 +62,9 @@ module.exports = function(app) {
       where: {
         UserId: params.id
       }
-    }).then(function(data){
+    }).then(function(data) {
       console.log(data);
-    })
+    });
   });
 };
 
