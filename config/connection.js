@@ -13,6 +13,7 @@ if (process.env.JAWSDB_URL) {
     user: "root",
     password: "4153FFSQLPW",
     database: "fridgeSearch"
+
   });
 }
 
