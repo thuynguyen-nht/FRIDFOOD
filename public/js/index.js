@@ -1,8 +1,22 @@
+function updateURLParameter(url, param) {
+  var tempURL = url.split("/").slice(0, 3);
+  console.log(tempURL);
+  tempURL.push(param);
+  console.log(tempURL.join("/"));
+  return tempURL.join("/");
+}
+
+function grabUserID() {
+  var pathName = window.location.pathname;
+  var id = pathName.split("/").slice(2, 3);
+  console.log(id);
+  return id;
+}
+
 $(document).ready(() => {
   $(".page-links").on("click", function() {
     var pathName = window.location.pathname;
-    console.log($(this).attr("id"));
-    window.location.href = pathName + "/" + $(this).attr("id");
+    window.location.href = updateURLParameter(pathName, $(this).attr("id"));
   });
   $(".slick").slick({
     autoplay: true,
