@@ -142,9 +142,16 @@ $(document).ready(() => {
           .trim(),
         unit: $("#units").val()
       };
+      function grabUserID() {
+        var pathName = window.location.pathname;
+        var id = pathName.split("/").slice(2, 3);
+        console.log(id);
+        return id;
+      }
+
       console.log(newIngredient);
-      // post request
-      $.ajax("/api/ingredient", {
+      // post request - need to add in the user id to the end point path
+      $.ajax("/api/ingredient/" + grabUserID(), {
         type: "POST",
         data: newIngredient
       });

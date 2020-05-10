@@ -29,27 +29,42 @@ module.exports = function(app) {
           lastName: req.body.lastName,
           email: req.body.email,
           UserId: result
-        }).then(function(data) {
-          res.send(result);
-        });
+        })
+          // make new ingredient row with new User ID from new User
+          .then(function(data) {
+            console.log("Your data is: ", data);
+            var userData = data;
+            console.log("Data values: " + userData.dataValues.UserId);
+            db.Ingredient.create({
+              UserId: userData.dataValues.UserId,
+              ingredientCountUnit: ""
+            });
+          })
+          .then(function(response) {
+            console.log("new user and ingredient table added");
+          });
       }
     });
   });
 
-  app.post("/api/ingredient", function(req, res) {
-    db.Ingredient.create({
-      UserId: "newuser",
-      ingredientCountUnit:
-        req.body.newIngredient + "," + req.body.quantity + "," + req.body.unit
-    });
-  });
-
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.json(dbExample);
-    });
+  // udpate ingredient
+  app.post("/api/ingredient/:id", function(req, res) {
+    console.log(JSON.stringify(req.body));
+    db.Ingredient.findAll({
+      where: {
+        UserId: params.id
+      }
+    }).then(function(data){
+      console.log(data);
+    })
   });
 };
+
+// Delete an example by id
+// app.delete("/api/examples/:id", function(req, res) {
+//   db.Example.destroy({ where: { id: req.params.id } }).then(function(
+//     dbExample
+//   ) {
+//     res.json(dbExample);
+//   });
+// });
