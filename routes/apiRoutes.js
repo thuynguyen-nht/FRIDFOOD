@@ -60,10 +60,46 @@ module.exports = function(app) {
     console.log(JSON.stringify(req.body));
     db.Ingredient.findAll({
       where: {
-        UserId: params.id
+        UserId: req.params.id
       }
     }).then(function(data) {
-      console.log(data);
+      console.log("User to update is: ", data[0]);
+      var updateData = data[0];
+      console.log(updateData.dataValues.UserId);
+      console.log(updateData.dataValues.ingredientCountUnit);
+      var newDataId = updateData.dataValues.UserId;
+      if (newDataId) {
+        // need to get this to add to cell, not overwite it with every new ingredient
+        var existingData = updateData.ingredientCountUnit;
+        var newData = [
+          existingData,
+          req.body.newIngredient,
+          req.body.quantity,
+          req.body.unit
+        ];
+        var updateThis = [];
+        console.log("Data to be added: ", newData);
+        //getting all the new data and putting into an array to put into DB
+        for (var i in newData) {
+          // making sure we do not add the empty string from initial table value upon creation to the updated values
+          if (newData[i].length >= 1) {
+            updateThis.push(newData[i]);
+          }
+        }
+        console.log(updateThis);
+        db.Ingredient.update(
+          {
+            // using the Pipe so we can parse later?
+            ingredientCountUnit: updateThis.toString() + "|"
+          },
+          {
+            where: { UserId: newDataId }
+          }
+        ).then(function(result) {
+          console.log("Rows upDated: " + result);
+          // then we need to reference reload?refresh?update DOM
+        });
+      }
     });
   });
 };
