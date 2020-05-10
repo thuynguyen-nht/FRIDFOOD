@@ -28,12 +28,23 @@ function signUp(signupEmail, signupPassword) {
     .auth()
     .createUserWithEmailAndPassword(signupEmail, signupPassword)
     .then(function(result) {
-      console.log(result.user.uid);
+      // console.log(result.user.uid);
       return result.user.uid;
     })
     .catch(function(error) {
       // Handle Errors here.
-      console.log(error.code);
+      // console.log(error.code);
+
+      if (
+        error.code === "auth/email-already-in-use" ||
+        error.code === "auth/invalid-email"
+      ) {
+        return { type: "email", message: error.message };
+      } else {
+        return { type: "password", message: error.message };
+      }
+      // console.log(error.code);
+      // console.log(error.message);
     });
 }
 
@@ -47,11 +58,19 @@ function login(loginEmail, loginPassword) {
       return result.user.uid;
     })
     .catch(function(error) {
-      // Handle Errors here.
-      // console.log(error.message);
+      // Handle Errors here
 
       //If there is an error return an json object with type and error message parameter
-      return error.message;
+      if (
+        error.code === "auth/user-not-found" ||
+        error.code === "auth/invalid-email"
+      ) {
+        return { type: "email", message: error.message };
+      } else {
+        return { type: "password", message: error.message };
+      }
+      // console.log(error.code);
+      // console.log(error.message);
     });
 }
 

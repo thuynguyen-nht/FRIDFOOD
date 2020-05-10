@@ -1,4 +1,9 @@
 $(document).ready(() => {
+  $(".page-links").on("click", function() {
+    var pathName = window.location.pathname;
+    console.log($(this).attr("id"));
+    window.location.href = pathName + "/" + $(this).attr("id");
+  });
   $(".slick").slick({
     autoplay: true,
     autoplaySpeed: 1000,
@@ -33,6 +38,10 @@ $(document).ready(() => {
     $("#signUp").on("submit", function(event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
+
+      $("#errorEmailSignup").text("");
+      $("#errorPasswordSignup").text("");
+
       console.log("sign up clicked");
       if (
         !$("#firstName")
@@ -71,8 +80,21 @@ $(document).ready(() => {
       $.ajax("/api/user", {
         type: "POST",
         data: newUser
-      }).then(function() {
+      }).then(function(result) {
         console.log("created new user");
+        console.log(result);
+        //Error creating user
+        if (typeof result === "object") {
+          if (result.type === "email") {
+            console.log(result.message);
+            $("#errorEmailSignup").text(result.message);
+          } else if (result.type === "password") {
+            $("#errorPasswordSignup").text(result.message);
+          }
+        } else {
+          //redirect
+          window.location.href = "/main/" + result;
+        }
         // Reload the page to get the updated list
         // window.location.href = "/mainPage";
       });
@@ -105,15 +127,18 @@ $(document).ready(() => {
       $.ajax("/api/user", {
         type: "GET",
         data: logInInfo
-      }).then(function(res) {
+      }).then(function(result) {
         // if(typeof response === [Object])
-        if (res.body.loginEmail && res.body.loginPassword) {
-          console.log("Welcome back, ", id);
-          // Reload the page to get the updated list
-          window.location.href = "/mainPage";
+        if (typeof result === "object") {
+          if (result.type === "email") {
+            console.log(result.message);
+            $("#errorEmail").text(result.message);
+          } else if (result.type === "password") {
+            $("#errorPassword").text(result.message);
+          }
         } else {
-          console.log("Incorrect Email or Password");
-          $("#errorPassword").append("Incorrect Email or Password");
+          //redirect
+          window.location.href = "/main/" + result;
         }
       });
     });

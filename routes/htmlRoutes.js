@@ -13,12 +13,12 @@ module.exports = function(app) {
     });
   });
 
-  // For design purpose only
-  app.get("/fridge", function(req, res) {
-    db.Ingredient.findAll({}).then(function() {
-      res.render("myFridge");
-    });
-  });
+  // // For design purpose only
+  // app.get("/main/:id/fridge", function(req, res) {
+  //   db.Ingredient.findAll({}).then(function() {
+  //     res.render("myFridge");
+  //   });
+  // });
 
   // Load main page after log in and pass the id to url
   app.get("/main/:id", function(req, res) {
