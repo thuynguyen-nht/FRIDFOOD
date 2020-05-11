@@ -40,12 +40,15 @@ module.exports = function(app) {
         })
           // make new ingredient row with new User ID from new User
           .then(function(data) {
-            console.log("Your data is: ", data);
             var userData = data;
             console.log("Data values: " + userData.dataValues.UserId);
             db.Ingredient.create({
               UserId: userData.dataValues.UserId,
               ingredientCountUnit: ""
+            });
+            db.Fridge.create({
+              UserId: userData.dataValues.UserId,
+              ingredientName: ""
             });
           })
           .then(function() {
@@ -63,42 +66,58 @@ module.exports = function(app) {
         UserId: req.params.id
       }
     }).then(function(data) {
-      console.log("User to update is: ", data[0]);
       var updateData = data[0];
-      console.log(updateData.dataValues.UserId);
-      console.log(updateData.dataValues.ingredientCountUnit);
+      console.log("user to update is", updateData.dataValues.UserId);
+      console.log(
+        "database has this:",
+        updateData.dataValues.ingredientCountUnit
+      );
       var newDataId = updateData.dataValues.UserId;
       if (newDataId) {
         // need to get this to add to cell, not overwite it with every new ingredient
-        var existingData = updateData.ingredientCountUnit;
+        var existingArr = updateData.dataValues.ingredientCountUnit;
+        // took out split on above to see whats up5/11 2:48pm
+        // console.log("existing arr:", existingArr);
         var newData = [
-          existingData,
-          req.body.newIngredient,
-          req.body.quantity,
-          req.body.unit
+          ...existingArr,
+          [req.body.newIngredient, req.body.quantity, req.body.unit]
         ];
         var updateThis = [];
+        var addThis = "";
         console.log("Data to be added: ", newData);
         //getting all the new data and putting into an array to put into DB
         for (var i in newData) {
           // making sure we do not add the empty string from initial table value upon creation to the updated values
-          if (newData[i].length >= 1) {
-            updateThis.push(newData[i]);
+          if (newData[i] !== "") {
+            addThis += newData[i];
           }
         }
-        console.log(updateThis);
+        updateThis.push(addThis);
+        console.log("update this:", updateThis);
+        var str = updateThis.toString();
+        console.log(str);
+        str += "|";
+        console.log(str);
         db.Ingredient.update(
           {
             // using the Pipe so we can parse later?
-            ingredientCountUnit: updateThis.toString() + "|"
+            ingredientCountUnit: str
           },
           {
             where: { UserId: newDataId }
           }
-        ).then(function(result) {
-          console.log("Rows upDated: " + result);
-          res.send(result);
-          // then we need to reference reload?refresh?update DOM
+        ).then(function() {
+          db.Ingredient.findAll({
+            where: {
+              UserId: newDataId
+            }
+          }).then(function(result) {
+            var inventory = result[0].dataValues.ingredientCountUnit;
+            console.log("inventory: ", inventory);
+            var single = inventory.split("|");
+            console.log("single", single);
+            res.send(inventory);
+          });
         });
       }
     });

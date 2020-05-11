@@ -188,7 +188,8 @@ $(document).ready(() => {
         type: "POST",
         data: newIngredient
       }).then(function(res) {
-        if (res.length >= 1) {
+        if (res) {
+          console.log(res);
           console.log("ingredients added to inventory successfully!");
           $("#ingredientSearch").val("");
           $("#quantity").val("");
