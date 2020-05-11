@@ -187,6 +187,12 @@ $(document).ready(() => {
       $.ajax("/api/ingredient/" + grabUserID(), {
         type: "POST",
         data: newIngredient
+      }).then(function(res) {
+        if (res.length >= 1) {
+          console.log("ingredients added to inventory successfully!");
+          $("#ingredientSearch").val("");
+          $("#quantity").val("");
+        }
       });
     });
   });

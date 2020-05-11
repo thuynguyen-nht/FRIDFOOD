@@ -97,6 +97,7 @@ module.exports = function(app) {
           }
         ).then(function(result) {
           console.log("Rows upDated: " + result);
+          res.send(result);
           // then we need to reference reload?refresh?update DOM
         });
       }
