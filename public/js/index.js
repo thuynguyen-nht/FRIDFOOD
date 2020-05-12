@@ -154,11 +154,85 @@ $(document).ready(() => {
       });
     });
 
+
+    // click add ingredient
+    $("#addIngredient").on("click", function() {
+      event.preventDefault();
+      console.log("add ingredient clicked");
+      if (
+        !$("#ingredientSearch")
+          .val()
+          .trim() ||
+        !$("#quantity")
+          .val()
+          .trim()
+      ) {
+        return;
+      }
+
+      var newIngredient = {
+        newIngredient: $("#ingredientSearch")
+          .val()
+          .trim(),
+        quantity: $("#quantity")
+          .val()
+          .trim(),
+        unit: $("#units").val()
+      };
+
+      console.log(newIngredient);
+      // post request - need to add in the user id to the end point path
+      $.ajax("/api/ingredient/" + grabUserID(), {
+        type: "POST",
+        data: newIngredient
+      }).then(function(res) {
+        if (res) {
+          console.log(res);
+          console.log("ingredients added to inventory successfully!");
+          $("#ingredientSearch").val("");
+          $("#quantity").val("");
+        }
+      });
+    });
+
+    // find recipes
+    $("#matchingRecipes").on("click", function() {
+      var id = grabUserID();
+      $.ajax("/api/recipes/" + id, {
+        type: "POST",
+        data: id
+      }).then(function(res) {
+        if (res) {
+          console.log(res);
+          var queryURL =
+            "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
+            res +
+            "&number=6&apiKey=fa0a4907d0da49f495ca32642485159e";
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          }).then(function(response) {
+            console.log(response);
+            var recipeObjsArr = [];
+            for (i in response) {
+              console.log(response[i].title);
+              console.log(response[i].image);
+              var obj = {
+                recipeTitle: response[i].title,
+                recipeImage: response[i].image
+              };
+              recipeObjsArr.push(obj);
+            }
+            console.log("RECIPE OBJECT ARRAY", recipeObjsArr);
+          });
+        }
+
     $("#logOut").on("click", function() {
       event.preventDefault();
       $.ajax("/api/logOut").then(function() {
         sessionStorage.removeItem("uid");
         window.location.href = "/";
+
       });
     });
   });

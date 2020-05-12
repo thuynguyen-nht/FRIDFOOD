@@ -15,14 +15,6 @@ module.exports = function(app) {
           res.send(result);
         }
       });
-    // once you get unique ID from firebase, query DB to get all info where userID is that uniqe id, but it will be placed in DB by sign up function
-    // db.User.findall({
-    //   where: {
-    //     UserId: res
-    //   }
-    // }).then(function(result) {
-    //   console.log(result);
-    // });
   });
 
   // Create a new user
@@ -36,12 +28,27 @@ module.exports = function(app) {
           lastName: req.body.lastName,
           email: req.body.email,
           UserId: result
-        }).then(function() {
-          res.send(result);
-        });
+        })
+          // make new ingredient row with new User ID from new User
+          .then(function(data) {
+            var userData = data;
+            console.log("Data values: " + userData.dataValues.UserId);
+            db.Ingredient.create({
+              UserId: userData.dataValues.UserId,
+              ingredientCountUnit: ""
+            });
+            db.Fridge.create({
+              UserId: userData.dataValues.UserId,
+              ingredientName: ""
+            });
+          })
+          .then(function() {
+            res.send(result);
+          });
       }
     });
   });
+
 
   app.get("/api/logOut", function(req, res) {
     //req stuff
@@ -52,4 +59,14 @@ module.exports = function(app) {
       res.send(result);
     });
   });
+
 };
+
+// Delete an example by id
+// app.delete("/api/examples/:id", function(req, res) {
+//   db.Example.destroy({ where: { id: req.params.id } }).then(function(
+//     dbExample
+//   ) {
+//     res.json(dbExample);
+//   });
+// });
