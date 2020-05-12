@@ -9,28 +9,25 @@ module.exports = function(app) {
       where: {
         UserId: req.params.id
       }
-    })
-      .then(function(data) {
-        console.log(data);
-        var x = data[0];
-        var newDataID = x.dataValues.UserId;
-        console.log(newDataID);
-        var dbData = x.dataValues.ingredientName;
-        console.log("data from DB>>", dbData);
-        var newIngredient = req.body.newIngredient;
-        console.log("new ingredient>>", newIngredient);
-        var newData = newIngredient + "," + dbData;
-        console.log("newData>>", newData);
-        db.Fridge.update(
-          {
-            ingredientName: newData
-          },
-          {
-            where: { UserId: newDataID }
-          }
-        );
-      })
-      .finally(function() {
+    }).then(function(data) {
+      console.log(data);
+      var x = data[0];
+      var newDataID = x.dataValues.UserId;
+      console.log(newDataID);
+      var dbData = x.dataValues.ingredientName;
+      console.log("data from DB>>", dbData);
+      var newIngredient = req.body.newIngredient;
+      console.log("new ingredient>>", newIngredient);
+      var newData = newIngredient + "," + dbData;
+      console.log("newData>>", newData);
+      db.Fridge.update(
+        {
+          ingredientName: newData
+        },
+        {
+          where: { UserId: newDataID }
+        }
+      ).finally(function() {
         db.Fridge.findAll({
           where: {
             UserId: id
@@ -42,6 +39,7 @@ module.exports = function(app) {
           res.send(inventoryArr);
         });
       });
+    });
   });
 
   app.post("/api/recipes/:id", function(req, res) {

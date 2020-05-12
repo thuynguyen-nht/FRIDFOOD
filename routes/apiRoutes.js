@@ -49,7 +49,6 @@ module.exports = function(app) {
     });
   });
 
-
   app.get("/api/logOut", function(req, res) {
     //req stuff
     console.log(req.query);
@@ -59,7 +58,6 @@ module.exports = function(app) {
       res.send(result);
     });
   });
-
 };
 
 // Delete an example by id
