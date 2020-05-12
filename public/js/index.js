@@ -160,6 +160,7 @@ $(document).ready(() => {
     $("#logOut").on("click", function() {
       event.preventDefault();
       $.ajax("/api/logOut").then(function() {
+        sessionStorage.removeItem("uid");
         window.location.href = "/";
       });
     });
