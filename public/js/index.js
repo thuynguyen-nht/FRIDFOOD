@@ -154,7 +154,6 @@ $(document).ready(() => {
       });
     });
 
-
     // click add ingredient
     $("#addIngredient").on("click", function() {
       event.preventDefault();
@@ -182,7 +181,7 @@ $(document).ready(() => {
 
       console.log(newIngredient);
       // post request - need to add in the user id to the end point path
-      $.ajax("/api/ingredient/" + grabUserID(), {
+      $.ajax("/api/ingredient/" + sessionStorage.getItem("uid"), {
         type: "POST",
         data: newIngredient
       }).then(function(res) {
@@ -197,7 +196,7 @@ $(document).ready(() => {
 
     // find recipes
     $("#matchingRecipes").on("click", function() {
-      var id = grabUserID();
+      var id = sessionStorage.getItem("uid");
       $.ajax("/api/recipes/" + id, {
         type: "POST",
         data: id
@@ -227,12 +226,13 @@ $(document).ready(() => {
           });
         }
 
-    $("#logOut").on("click", function() {
-      event.preventDefault();
-      $.ajax("/api/logOut").then(function() {
-        sessionStorage.removeItem("uid");
-        window.location.href = "/";
-
+        $("#logOut").on("click", function() {
+          event.preventDefault();
+          $.ajax("/api/logOut").then(function() {
+            sessionStorage.removeItem("uid");
+            window.location.href = "/";
+          });
+        });
       });
     });
   });
