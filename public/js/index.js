@@ -114,6 +114,9 @@ $(document).ready(() => {
     $("#logIn").on("click", function() {
       event.preventDefault();
 
+      $("#errorEmail").text("");
+      $("#errorPassword").text("");
+
       if (
         !$(".logInInfo")
           .val()
@@ -151,6 +154,13 @@ $(document).ready(() => {
           sessionStorage.setItem("uid", result);
           window.location.href = "/main";
         }
+      });
+    });
+
+    $("#logOut").on("click", function() {
+      event.preventDefault();
+      $.ajax("/api/logOut").then(function() {
+        window.location.href = "/";
       });
     });
   });
