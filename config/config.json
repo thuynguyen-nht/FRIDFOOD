@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "Nak09Nak27",
     "database": "fridgeSearch",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "password",
+    "password": "Nak09Nak27",
     "database": "fridgeSearch",
     "host": "localhost",
     "dialect": "mysql",

@@ -1,17 +1,15 @@
-function updateURLParameter(url, param) {
-  var tempURL = url.split("/").slice(0, 3);
-  console.log(tempURL);
-  tempURL.push(param);
-  console.log(tempURL.join("/"));
-  return tempURL.join("/");
-}
-
-function grabUserID() {
-  var pathName = window.location.pathname;
-  var id = pathName.split("/").slice(2, 3);
-  console.log(id);
-  return id;
-}
+// Code to prevent back if the user is logged out
+$(window).on("load", function() {
+  if (!sessionStorage.getItem("uid")) {
+    function preventBack() {
+      window.history.forward();
+    }
+    setTimeout(preventBack(), 0);
+    window.onunload = function() {
+      null;
+    };
+  }
+});
 
 $(document).ready(() => {
   $(".slick").slick({
