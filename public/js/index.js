@@ -225,14 +225,13 @@ $(document).ready(() => {
             console.log("RECIPE OBJECT ARRAY", recipeObjsArr);
           });
         }
-
-        $("#logOut").on("click", function() {
-          event.preventDefault();
-          $.ajax("/api/logOut").then(function() {
-            sessionStorage.removeItem("uid");
-            window.location.href = "/";
-          });
-        });
+      });
+    });
+    $("#logOut").on("click", function() {
+      event.preventDefault();
+      $.ajax("/api/logOut").then(function() {
+        sessionStorage.removeItem("uid");
+        window.location.href = "/";
       });
     });
   });
