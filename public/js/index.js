@@ -82,8 +82,6 @@ $(document).ready(() => {
           .val()
           .trim()
       };
-      console.log(newUser);
-
       // Send the POST request.
       $.ajax("/api/user", {
         type: "POST",
@@ -101,7 +99,8 @@ $(document).ready(() => {
           }
         } else {
           //redirect
-          window.location.href = "/main/" + result;
+          sessionStorage.setItem("uid", result);
+          window.location.href = "/main";
         }
         // Reload the page to get the updated list
         // window.location.href = "/mainPage";

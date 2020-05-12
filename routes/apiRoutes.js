@@ -6,7 +6,6 @@ module.exports = function(app) {
   // Get all info based on logged in user
   app.get("/api/user", function(req, res) {
     //req stuff
-    console.log(req.query);
     userAuth
       .login(req.query.loginEmail, req.query.loginPassword)
       .then(function(result) {
