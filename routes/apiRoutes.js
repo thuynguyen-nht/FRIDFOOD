@@ -6,7 +6,6 @@ module.exports = function(app) {
   // Get all info based on logged in user
   app.get("/api/user", function(req, res) {
     //req stuff
-    console.log(req.query);
     userAuth
       .login(req.query.loginEmail, req.query.loginPassword)
       .then(function(result) {
@@ -49,6 +48,18 @@ module.exports = function(app) {
       }
     });
   });
+
+
+  app.get("/api/logOut", function(req, res) {
+    //req stuff
+    console.log(req.query);
+    userAuth.logOut().then(function(result) {
+      console.log("User signed out");
+      // console.log(result);
+      res.send(result);
+    });
+  });
+
 };
 
 // Delete an example by id

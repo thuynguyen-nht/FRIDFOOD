@@ -3,16 +3,25 @@ require("dotenv").config();
 var firebase = require("firebase/app");
 require("firebase/auth");
 
-var app = firebase.initializeApp({
-  apiKey: process.env.FIREBASE_APIKEY,
-  authDomain: process.env.FIREBASE_AUTHDOMAIN,
-  databaseURL: process.env.FIREBASE_DATABASEURL,
-  projectId: process.env.FIREBASE_PROJECTID,
-  storageBucket: process.env.FIREBASE_STORAGEBUCKER,
-  messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
-  appId: process.env.FIREBASE_APPID
-});
+// var app = firebase.initializeApp({
+//   apiKey: process.env.FIREBASE_APIKEY,
+//   authDomain: process.env.FIREBASE_AUTHDOMAIN,
+//   databaseURL: process.env.FIREBASE_DATABASEURL,
+//   projectId: process.env.FIREBASE_PROJECTID,
+//   storageBucket: process.env.FIREBASE_STORAGEBUCKER,
+//   messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID,
+//   appId: process.env.FIREBASE_APPID
+// });
 
+var app = firebase.initializeApp({
+  apiKey: "AIzaSyBFgVUzb0VsQHwakn-BsRhkbkh5aGuBQc8",
+  authDomain: "fridfood-d54a0.firebaseapp.com",
+  databaseURL: "https://fridfood-d54a0.firebaseio.com",
+  projectId: "fridfood-d54a0",
+  storageBucket: "fridfood-d54a0.appspot.com",
+  messagingSenderId: "239576997659",
+  appId: "1:239576997659:web:fd7cc20793ce4746bb7dbe"
+});
 // app.auth().onAuthStateChanged(function(user) {
 //   if (user) {
 //     // User is signed in.
@@ -74,7 +83,22 @@ function login(loginEmail, loginPassword) {
     });
 }
 
+function logOut() {
+  return app
+    .auth()
+    .signOut()
+    .then(function() {
+      // Sign-out successful.
+      console.log("User sign out successfully");
+    })
+    .catch(function(error) {
+      // An error happened.
+      console.log(error.message);
+    });
+}
+
 module.exports = {
   login: login,
-  signUp: signUp
+  signUp: signUp,
+  logOut: logOut
 };
