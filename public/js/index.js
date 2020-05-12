@@ -14,10 +14,6 @@ function grabUserID() {
 }
 
 $(document).ready(() => {
-  $(".page-links").on("click", function() {
-    var pathName = window.location.pathname;
-    window.location.href = updateURLParameter(pathName, $(this).attr("id"));
-  });
   $(".slick").slick({
     autoplay: true,
     autoplaySpeed: 1000,
@@ -152,7 +148,8 @@ $(document).ready(() => {
           }
         } else {
           //redirect
-          window.location.href = "/main/" + result;
+          sessionStorage.setItem("uid", result);
+          window.location.href = "/main";
         }
       });
     });
