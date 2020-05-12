@@ -6,22 +6,8 @@ module.exports = function(app) {
     res.render("index");
   });
 
-  // For design purpose only
-  app.get("/main", function(req, res) {
-    db.User.findAll({}).then(function() {
-      res.render("mainPage");
-    });
-  });
-
-  // // For design purpose only
-  // app.get("/main/:id/fridge", function(req, res) {
-  //   db.Ingredient.findAll({}).then(function() {
-  //     res.render("myFridge");
-  //   });
-  // });
-
   // Load main page after log in and pass the id to url
-  app.get("/main/:id", function(req, res) {
+  app.get("/main", function(req, res) {
     db.User.findAll({}).then(function(dbExamples) {
       res.render("mainPage", {
         msg: "Welcome!",
@@ -31,7 +17,7 @@ module.exports = function(app) {
   });
 
   // Load main page after log in and pass the id to url
-  app.get("/main/:id/fridge", function(req, res) {
+  app.get("/fridge", function(req, res) {
     db.User.findAll({}).then(function(dbExamples) {
       res.render("myFridge", {
         msg: "Welcome!",

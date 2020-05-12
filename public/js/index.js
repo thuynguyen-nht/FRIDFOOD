@@ -1,23 +1,17 @@
-function updateURLParameter(url, param) {
-  var tempURL = url.split("/").slice(0, 3);
-  console.log(tempURL);
-  tempURL.push(param);
-  console.log(tempURL.join("/"));
-  return tempURL.join("/");
-}
-
-function grabUserID() {
-  var pathName = window.location.pathname;
-  var id = pathName.split("/").slice(2, 3);
-  console.log(id);
-  return id;
-}
+// Code to prevent back if the user is logged out
+$(window).on("load", function() {
+  if (!sessionStorage.getItem("uid")) {
+    function preventBack() {
+      window.history.forward();
+    }
+    setTimeout(preventBack(), 0);
+    window.onunload = function() {
+      null;
+    };
+  }
+});
 
 $(document).ready(() => {
-  $(".page-links").on("click", function() {
-    var pathName = window.location.pathname;
-    window.location.href = updateURLParameter(pathName, $(this).attr("id"));
-  });
   $(".slick").slick({
     autoplay: true,
     autoplaySpeed: 1000,
@@ -118,6 +112,9 @@ $(document).ready(() => {
     $("#logIn").on("click", function() {
       event.preventDefault();
 
+      $("#errorEmail").text("");
+      $("#errorPassword").text("");
+
       if (
         !$(".logInInfo")
           .val()
@@ -152,8 +149,17 @@ $(document).ready(() => {
           }
         } else {
           //redirect
-          window.location.href = "/main/" + result;
+          sessionStorage.setItem("uid", result);
+          window.location.href = "/main";
         }
+      });
+    });
+
+    $("#logOut").on("click", function() {
+      event.preventDefault();
+      $.ajax("/api/logOut").then(function() {
+        sessionStorage.removeItem("uid");
+        window.location.href = "/";
       });
     });
   });
