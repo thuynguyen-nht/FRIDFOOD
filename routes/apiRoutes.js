@@ -16,14 +16,6 @@ module.exports = function(app) {
           res.send(result);
         }
       });
-    // once you get unique ID from firebase, query DB to get all info where userID is that uniqe id, but it will be placed in DB by sign up function
-    // db.User.findall({
-    //   where: {
-    //     UserId: res
-    //   }
-    // }).then(function(result) {
-    //   console.log(result);
-    // });
   });
 
   // Create a new user
@@ -54,71 +46,6 @@ module.exports = function(app) {
           .then(function() {
             res.send(result);
           });
-      }
-    });
-  });
-
-  // udpate ingredient
-  app.post("/api/ingredient/:id", function(req, res) {
-    console.log(JSON.stringify(req.body));
-    db.Ingredient.findAll({
-      where: {
-        UserId: req.params.id
-      }
-    }).then(function(data) {
-      var updateData = data[0];
-      console.log("user to update is", updateData.dataValues.UserId);
-      console.log(
-        "database has this:",
-        updateData.dataValues.ingredientCountUnit
-      );
-      var newDataId = updateData.dataValues.UserId;
-      if (newDataId) {
-        // need to get this to add to cell, not overwite it with every new ingredient
-        var existingArr = updateData.dataValues.ingredientCountUnit;
-        // took out split on above to see whats up5/11 2:48pm
-        // console.log("existing arr:", existingArr);
-        var newData = [
-          ...existingArr,
-          [req.body.newIngredient, req.body.quantity, req.body.unit]
-        ];
-        var updateThis = [];
-        var addThis = "";
-        console.log("Data to be added: ", newData);
-        //getting all the new data and putting into an array to put into DB
-        for (var i in newData) {
-          // making sure we do not add the empty string from initial table value upon creation to the updated values
-          if (newData[i] !== "") {
-            addThis += newData[i];
-          }
-        }
-        updateThis.push(addThis);
-        console.log("update this:", updateThis);
-        var str = updateThis.toString();
-        console.log(str);
-        str += "|";
-        console.log(str);
-        db.Ingredient.update(
-          {
-            // using the Pipe so we can parse later?
-            ingredientCountUnit: str
-          },
-          {
-            where: { UserId: newDataId }
-          }
-        ).then(function() {
-          db.Ingredient.findAll({
-            where: {
-              UserId: newDataId
-            }
-          }).then(function(result) {
-            var inventory = result[0].dataValues.ingredientCountUnit;
-            console.log("inventory: ", inventory);
-            var single = inventory.split("|");
-            console.log("single", single);
-            res.send(inventory);
-          });
-        });
       }
     });
   });

@@ -196,5 +196,39 @@ $(document).ready(() => {
         }
       });
     });
+
+    // find recipes
+    $("#matchingRecipes").on("click", function() {
+      var id = grabUserID();
+      $.ajax("/api/recipes/" + id, {
+        type: "POST",
+        data: id
+      }).then(function(res) {
+        if (res) {
+          console.log(res);
+          var queryURL =
+            "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
+            res +
+            "&number=6&apiKey=fa0a4907d0da49f495ca32642485159e";
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          }).then(function(response) {
+            console.log(response);
+            var recipeObjsArr = [];
+            for (i in response) {
+              console.log(response[i].title);
+              console.log(response[i].image);
+              var obj = {
+                recipeTitle: response[i].title,
+                recipeImage: response[i].image
+              };
+              recipeObjsArr.push(obj);
+            }
+            console.log("RECIPE OBJECT ARRAY", recipeObjsArr);
+          });
+        }
+      });
+    });
   });
 });
