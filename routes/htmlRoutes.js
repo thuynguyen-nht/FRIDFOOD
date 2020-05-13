@@ -24,19 +24,22 @@ module.exports = function(app) {
       }
     })
       .then(function(dbFridges) {
-        console.log("DB FRIDGES", dbFridges[0]);
-        var fridge = dbFridges[0];
-        var ingredients = fridge.dataValues.ingredientName.split(",");
-        console.log("INGREDIENTS", ingredients);
         var objArr = [];
-        for (i in ingredients) {
-          if (ingredients[i] !== "") {
-            var obj = {
-              ingredient: ingredients[i]
-            };
-            objArr.push(obj);
+        if (dbFridges[0] !== undefined) {
+          console.log("DB FRIDGES", dbFridges[0]);
+          var fridge = dbFridges[0];
+          var ingredients = fridge.dataValues.ingredientName.split(",");
+          console.log("INGREDIENTS", ingredients);
+          for (i in ingredients) {
+            if (ingredients[i] !== "") {
+              var obj = {
+                ingredient: ingredients[i]
+              };
+              objArr.push(obj);
+            }
           }
         }
+
         console.log(objArr);
 
         res.render("myFridge", {
