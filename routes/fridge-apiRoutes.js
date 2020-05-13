@@ -11,47 +11,86 @@ module.exports = function(app) {
       }
     }).then(function(data) {
       console.log(data);
-      var x = data[0];
-      var newDataID = x.dataValues.UserId;
-      console.log(newDataID);
-      var dbData = x.dataValues.ingredientName;
-      console.log("data from DB>>", dbData);
-      var newIngredient = req.body.newIngredient;
-      console.log("new ingredient>>", newIngredient);
-      var newData = newIngredient + "," + dbData;
-      console.log("newData>>", newData);
-      db.Fridge.update(
-        {
-          ingredientName: newData
-        },
-        {
-          where: { UserId: newDataID }
-        }
-      ).finally(function() {
-        db.Fridge.findAll({
-          where: {
-            UserId: id
+      if (data) {
+        var x = data[0];
+        var newDataID = x.dataValues.UserId;
+        console.log(newDataID);
+        var dbData = x.dataValues.ingredientName;
+        console.log("data from DB>>", dbData);
+        var newIngredient = req.body.newIngredient;
+        console.log("new ingredient>>", newIngredient);
+        var newData = newIngredient + "," + dbData;
+        console.log("newData>>", newData);
+        db.Fridge.update(
+          {
+            ingredientName: newData
+          },
+          {
+            where: { UserId: newDataID }
           }
-        })
-          .then(function(result) {
-            var inventory = result[0];
-            var inventoryArr = inventory.dataValues.ingredientName.split(",");
-            console.log(inventoryArr);
-            var objArr = [];
-            for (i in inventoryArr) {
-              if (inventoryArr[i] !== "") {
-                var obj = {
-                  ingredient: inventoryArr[i]
-                };
-                objArr.push(obj);
-              }
+        ).finally(function() {
+          db.Fridge.findAll({
+            where: {
+              UserId: id
             }
-            return objArr;
           })
-          .then(function(obj) {
-            res.send(obj);
-          });
-      });
+            .then(function(result) {
+              var inventory = result[0];
+              var inventoryArr = inventory.dataValues.ingredientName.split(",");
+              console.log(inventoryArr);
+              var objArr = [];
+              for (i in inventoryArr) {
+                if (inventoryArr[i] !== "") {
+                  var obj = {
+                    ingredient: inventoryArr[i]
+                  };
+                  objArr.push(obj);
+                }
+              }
+              return objArr;
+            })
+            .then(function(obj) {
+              res.send(obj);
+            });
+        });
+      } else {
+        var newIngredient = req.body.newIngredient;
+        console.log("new ingredient>>", newIngredient);
+        var newData = newIngredient;
+        console.log("newData>>", newData);
+        db.Fridge.update(
+          {
+            ingredientName: newData
+          },
+          {
+            where: { UserId: newDataID }
+          }
+        ).finally(function() {
+          db.Fridge.findAll({
+            where: {
+              UserId: id
+            }
+          })
+            .then(function(result) {
+              var inventory = result[0];
+              var inventoryArr = inventory.dataValues.ingredientName.split(",");
+              console.log(inventoryArr);
+              var objArr = [];
+              for (i in inventoryArr) {
+                if (inventoryArr[i] !== "") {
+                  var obj = {
+                    ingredient: inventoryArr[i]
+                  };
+                  objArr.push(obj);
+                }
+              }
+              return objArr;
+            })
+            .then(function(obj) {
+              res.send(obj);
+            });
+        });
+      }
     });
   });
   app.post("/api/recipes/:id", function(req, res) {
