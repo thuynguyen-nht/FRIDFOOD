@@ -13,9 +13,9 @@ module.exports = function(app) {
 
   // Load fridge page
   app.get("/fridge/:uid", function(req, res) {
-    console.log("REQ DOT PARAMS", req.params);
+    // console.log("REQ DOT PARAMS", req.params);
     // var id = Window.sessionStorage.getItem("uid");
-    console.log("FRIDGE loaded", req.params.uid);
+    // console.log("FRIDGE loaded", req.params.uid);
 
     db.Fridge.findAll({
       where: {

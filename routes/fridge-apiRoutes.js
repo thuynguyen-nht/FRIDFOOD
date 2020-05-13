@@ -18,10 +18,16 @@ module.exports = function(app) {
         var newDataID = x.dataValues.UserId;
         console.log(newDataID);
         var dbData = x.dataValues.ingredientName;
+        var dbArr = dbData.split(",");
+        console.log("DATABASE ARRAY", dbArr);
         console.log("data from DB>>", dbData);
         var newIngredient = req.body.newIngredient;
         console.log("new ingredient>>", newIngredient);
+
         var newData = newIngredient + "," + dbData;
+        if (dbArr.includes(newIngredient)) {
+          newData = dbData;
+        }
         console.log("newData>>", newData);
         db.Fridge.update(
           {
