@@ -292,7 +292,7 @@ $(document).ready(() => {
           var queryURL =
             "https://api.spoonacular.com/recipes/findByIngredients?ingredients=" +
             res +
-            "&number=6&apiKey=fa0a4907d0da49f495ca32642485159e";
+            "&number=6&apiKey=759eb548cc20493d990944d396f7ad6c";
           $.ajax({
             url: queryURL,
             method: "GET"

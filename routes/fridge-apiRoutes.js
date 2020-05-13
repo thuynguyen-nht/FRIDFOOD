@@ -53,33 +53,32 @@ module.exports = function(app) {
           });
       });
     });
-
-    app.post("/api/recipes/:id", function(req, res) {
-      console.log("req params is:--->", req.params.id);
-      db.Fridge.findAll({
-        where: {
-          UserId: req.params.id
-        }
-      }).then(function(response) {
-        var data = response[0];
-
-        var searchItems = data.dataValues.ingredientName;
-        console.log(searchItems);
-        res.send(searchItems);
-      });
-    });
-
-    // app.get("/api/ingredients/:id", function(req, res) {
-    //   console.log(req.body);
-    //   db.Fridge.findAll({
-    //     where: {
-    //       UserId: req.body.UserId
-    //     }
-    //   }).then(function(response) {
-    //     console.log(response);
-    //     var Arr = response.split(",");
-    //     res.send(Arr);
-    //   });
-    // });
   });
+  app.post("/api/recipes/:id", function(req, res) {
+    console.log("req params is:--->", req.params.id);
+    db.Fridge.findAll({
+      where: {
+        UserId: req.params.id
+      }
+    }).then(function(response) {
+      var data = response[0];
+
+      var searchItems = data.dataValues.ingredientName;
+      console.log(searchItems);
+      res.send(searchItems);
+    });
+  });
+
+  // app.get("/api/ingredients/:id", function(req, res) {
+  //   console.log(req.body);
+  //   db.Fridge.findAll({
+  //     where: {
+  //       UserId: req.body.UserId
+  //     }
+  //   }).then(function(response) {
+  //     console.log(response);
+  //     var Arr = response.split(",");
+  //     res.send(Arr);
+  //   });
+  // });
 };
