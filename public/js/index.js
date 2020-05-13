@@ -307,6 +307,21 @@ $(document).ready(() => {
                 recipeImage: response[i].image
               };
               recipeObjsArr.push(obj);
+
+              var matchArea = $("<div class='card'>");
+              var imgMatch = $("<img class='card-img-top'>").attr(
+                "src",
+                response[i].image
+              );
+              var matchBody = $("<div class='card-body'>");
+
+              var matchTitle = $(
+                "<h5 class='card-title'>" + response[i].title + "</h5>"
+              );
+              matchBody.append(matchTitle);
+              matchArea.append(imgMatch);
+              matchArea.append(matchBody);
+              $(".renderMatchRecipe").append(matchArea);
             }
             console.log("RECIPE OBJECT ARRAY", recipeObjsArr);
           });
