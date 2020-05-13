@@ -1,0 +1,30 @@
+[
+  {
+    "name": "egg",
+    "quantity": 2
+  },
+  {
+    "name": "rice",
+    "quantity": 2
+  },
+  {
+    "name": "noodles",
+    "quantity": 2
+  },
+  {
+    "name": "tomato",
+    "quantity": 2
+  },
+  {
+    "name": "bean",
+    "quantity": 2
+  },
+  {
+    "name": "beef",
+    "quantity": 2
+  },
+  {
+    "name": "pork",
+    "quantity": 2
+  }
+]
