@@ -35,45 +35,45 @@ $(document).ready(() => {
     console.log("id is", uid);
     window.location.href = "/fridge/" + uid;
   });
-  $.ajax({
-    url:
-      "https://api.spoonacular.com/recipes/random?number=6&apiKey=fa0a4907d0da49f495ca32642485159e",
-    method: "GET"
-  }).then(function(response) {
-    console.log("api call made");
-    var data = response.recipes;
-    console.log(data);
-    // var objArray = [];
-    for (i in data) {
-      // var obj = {
-      //   title: data[i].title,
-      //   image: data[i].image,
-      //   instructions: data[i].instructions
-      // };
-      // objArray.push(obj);
-      var slickArea = $("<div class='card mx-3' style='width: 18rem;'>");
+  // $.ajax({
+  //   url:
+  //     "https://api.spoonacular.com/recipes/random?number=6&apiKey=fa0a4907d0da49f495ca32642485159e",
+  //   method: "GET"
+  // }).then(function(response) {
+  //   console.log("api call made");
+  //   var data = response.recipes;
+  //   console.log(data);
+  //   // var objArray = [];
+  //   for (i in data) {
+  //     // var obj = {
+  //     //   title: data[i].title,
+  //     //   image: data[i].image,
+  //     //   instructions: data[i].instructions
+  //     // };
+  //     // objArray.push(obj);
+  //     var slickArea = $("<div class='card mx-3' style='width: 18rem;'>");
 
-      var img = $("<img class='card-img-top'>");
-      var slickBody = $("<div class='card-body'>");
-      var recipeTitle = data[i].title;
-      var recipeInstruction = data[i].instruction;
-      var buttonToRecipes = $(
-        "<button type='button' class='btn btn-primary renderRandomRecipes' data-toggle='modal' data-target='#randomRecipe'>" +
-          data[i].title +
-          "</button>"
-      );
+  //     var img = $("<img class='card-img-top'>");
+  //     var slickBody = $("<div class='card-body'>");
+  //     var recipeTitle = data[i].title;
+  //     var recipeInstruction = data[i].instruction;
+  //     var buttonToRecipes = $(
+  //       "<button type='button' class='btn btn-primary renderRandomRecipes' data-toggle='modal' data-target='#randomRecipe'>" +
+  //         data[i].title +
+  //         "</button>"
+  //     );
 
-      img.attr("src", data[i].image);
-      slickBody.append(buttonToRecipes);
-      slickArea.append(img);
-      slickArea.append(buttonToRecipes);
+  //     img.attr("src", data[i].image);
+  //     slickBody.append(buttonToRecipes);
+  //     slickArea.append(img);
+  //     slickArea.append(buttonToRecipes);
 
-      $(".slick").prepend(slickArea);
-      $("#modalTitle").html(recipeTitle);
-      $(".instructionRecipe").html(recipeInstruction);
-    }
-    // console.log(objArray);
-  });
+  //     $(".slick").prepend(slickArea);
+  //     $("#modalTitle").html(recipeTitle);
+  //     $(".instructionRecipe").html(recipeInstruction);
+  //   }
+  //   // console.log(objArray);
+  // });
 
   $(".slick").slick({
     autoplay: true,
