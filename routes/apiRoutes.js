@@ -33,10 +33,6 @@ module.exports = function(app) {
           .then(function(data) {
             var userData = data;
             console.log("Data values: " + userData.dataValues.UserId);
-            db.Ingredient.create({
-              UserId: userData.dataValues.UserId,
-              ingredientCountUnit: ""
-            });
             db.Fridge.create({
               UserId: userData.dataValues.UserId,
               ingredientName: ""
