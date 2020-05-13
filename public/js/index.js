@@ -1,5 +1,21 @@
+// function getFridgeStuff() {
+//   console.log("fridge function called");
+//   var id = sessionStorage.getItem("uid");
+//   var data = {
+//     UserId: id
+//   };
+//   console.log(data);
+//   $.ajax("/api/ingredients/" + id, {
+//     type: "GET",
+//     data: data
+//   }).then(function(res) {
+//     console.log(res);
+//   });
+// }
+
 // Code to prevent back if the user is logged out
 $(window).on("load", function() {
+  console.count("preventBack()");
   if (!sessionStorage.getItem("uid")) {
     function preventBack() {
       window.history.forward();
@@ -9,9 +25,56 @@ $(window).on("load", function() {
       null;
     };
   }
+  console.log("USER ID IS:", sessionStorage.getItem("uid"));
+  // getFridgeStuff();
 });
 
 $(document).ready(() => {
+  $(".page-links").on("click", function() {
+    var uid = sessionStorage.getItem("uid");
+    console.log("id is", uid);
+    window.location.href = "/fridge/" + uid;
+  });
+  $.ajax({
+    url:
+      "https://api.spoonacular.com/recipes/random?number=6&apiKey=fa0a4907d0da49f495ca32642485159e",
+    method: "GET"
+  }).then(function(response) {
+    console.log("api call made");
+    var data = response.recipes;
+    console.log(data);
+    // var objArray = [];
+    for (i in data) {
+      // var obj = {
+      //   title: data[i].title,
+      //   image: data[i].image,
+      //   instructions: data[i].instructions
+      // };
+      // objArray.push(obj);
+      var slickArea = $("<div class='card mx-3' style='width: 18rem;'>");
+
+      var img = $("<img class='card-img-top'>");
+      var slickBody = $("<div class='card-body'>");
+      var recipeTitle = data[i].title;
+      var recipeInstruction = data[i].instruction;
+      var buttonToRecipes = $(
+        "<button type='button' class='btn btn-primary renderRandomRecipes' data-toggle='modal' data-target='#randomRecipe'>" +
+          data[i].title +
+          "</button>"
+      );
+
+      img.attr("src", data[i].image);
+      slickBody.append(buttonToRecipes);
+      slickArea.append(img);
+      slickArea.append(buttonToRecipes);
+
+      $(".slick").prepend(slickArea);
+      $("#modalTitle").html(recipeTitle);
+      $(".instructionRecipe").html(recipeInstruction);
+    }
+    // console.log(objArray);
+  });
+
   $(".slick").slick({
     autoplay: true,
     autoplaySpeed: 1000,
@@ -43,6 +106,22 @@ $(document).ready(() => {
   });
 
   $(function() {
+    $(".renderRandomRecipes").on("click", function() {
+      console.log("TOGGLE THE MODAL");
+      $("#randomRecipe").modal("toggle");
+    });
+    // var id = sessionStorage.getItem("uid");
+    // var data = {
+    //   UserId: id
+    // };
+    // console.log(data);
+    // $.ajax("/api/ingredients/" + id, {
+    //   type: "GET",
+    //   data: data
+    // }).then(function(res) {
+    //   console.log(res);
+    // });
+
     $("#signUp").on("submit", function(event) {
       // Make sure to preventDefault on a submit event.
       event.preventDefault();
@@ -181,15 +260,22 @@ $(document).ready(() => {
 
       console.log(newIngredient);
       // post request - need to add in the user id to the end point path
+
       $.ajax("/api/ingredient/" + sessionStorage.getItem("uid"), {
         type: "POST",
         data: newIngredient
       }).then(function(res) {
         if (res) {
           console.log(res);
+          // var Arr = res;
+          // for (i in Arr) {
+          //   var elm = "<li class='listItem'>" + Arr[i] + "</li>";
+          //   $("#displayIngredients").html(elm);
+          // }
           console.log("ingredients added to inventory successfully!");
           $("#ingredientSearch").val("");
           $("#quantity").val("");
+          window.location.href = "/fridge/" + sessionStorage.getItem("uid");
         }
       });
     });
