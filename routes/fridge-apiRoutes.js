@@ -10,8 +10,10 @@ module.exports = function(app) {
         UserId: req.params.id
       }
     }).then(function(data) {
+      console.log("Obtaining fridge data");
       console.log(data);
-      if (data) {
+
+      if (data[0] !== undefined) {
         var x = data[0];
         var newDataID = x.dataValues.UserId;
         console.log(newDataID);
