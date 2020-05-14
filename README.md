@@ -1,6 +1,6 @@
 # Project2
 
-FRIDFOOD!! An  MVC app that turns whats in your fridge to food.
+FRIDFOOD!! A  MVC app that turns whats in your fridge to food.
 
 ## Objective
 
@@ -31,7 +31,7 @@ With people being stuck in their homes during SIP, learning to find quick recipe
 1. When users sign up, their login information is sent to Firebase to authenticate them, then saves their login information paired with a unique id key which is sent back to the front to provide a user unique experience.
 2. Once logged in, the user can go to the My Fridge page and add ingredients to their fridge. Their input is stored in a database and then sent back to display to the user.
 3. When the user wants to search for recipes and hits the button to do so, all the contents of their fridge is grabbed from the database and plugged into a get request guery to the [Spoonacular API](https://spoonacular.com/food-api).
-4. When the user is done searching for the vast possibilties and options to add to their cooking prowess, they can logout by clicking log out or just exiting the window/tab. Bon Appetite, nerds.
+4. When the user is done searching for the vast possibilties and options to add to their cooking prowess, they can logout by clicking log out or just exiting the window/tab. Bon Appetit, nerds.
 
 ## Technologies/Tools
 
