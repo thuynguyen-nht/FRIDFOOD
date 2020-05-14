@@ -1,34 +1,26 @@
 var db = require("../models");
-require("dotenv");
+var axios = require("axios");
+require("dotenv").config();
 
 module.exports = function(app) {
   app.post("/api/ingredient/:id", function(req, res) {
-    console.log("req body>>", req.body);
     var id = req.params.id;
     db.Fridge.findAll({
       where: {
         UserId: req.params.id
       }
     }).then(function(data) {
-      console.log("Obtaining fridge data");
-      console.log(data);
-
       if (data[0] !== undefined) {
         var x = data[0];
         var newDataID = x.dataValues.UserId;
-        console.log(newDataID);
         var dbData = x.dataValues.ingredientName;
         var dbArr = dbData.split(",");
-        console.log("DATABASE ARRAY", dbArr);
-        console.log("data from DB>>", dbData);
         var newIngredient = req.body.newIngredient;
-        console.log("new ingredient>>", newIngredient);
 
         var newData = newIngredient + "," + dbData;
         if (dbArr.includes(newIngredient)) {
           newData = dbData;
         }
-        console.log("newData>>", newData);
         db.Fridge.update(
           {
             ingredientName: newData
@@ -45,7 +37,6 @@ module.exports = function(app) {
             .then(function(result) {
               var inventory = result[0];
               var inventoryArr = inventory.dataValues.ingredientName.split(",");
-              console.log(inventoryArr);
               var objArr = [];
               for (i in inventoryArr) {
                 if (inventoryArr[i] !== "") {
@@ -63,9 +54,7 @@ module.exports = function(app) {
         });
       } else {
         var newIngredient = req.body.newIngredient;
-        console.log("new ingredient>>", newIngredient);
         var newData = newIngredient;
-        console.log("newData>>", newData);
         db.Fridge.update(
           {
             ingredientName: newData
@@ -82,7 +71,6 @@ module.exports = function(app) {
             .then(function(result) {
               var inventory = result[0];
               var inventoryArr = inventory.dataValues.ingredientName.split(",");
-              console.log(inventoryArr);
               var objArr = [];
               for (i in inventoryArr) {
                 if (inventoryArr[i] !== "") {
@@ -102,7 +90,6 @@ module.exports = function(app) {
     });
   });
   app.post("/api/recipes/:id", function(req, res) {
-    console.log("req params is:--->", req.params.id);
     db.Fridge.findAll({
       where: {
         UserId: req.params.id
@@ -111,21 +98,21 @@ module.exports = function(app) {
       var data = response[0];
 
       var searchItems = data.dataValues.ingredientName;
-      console.log(searchItems);
-      res.send(searchItems);
+      axios({
+        method: "GET",
+        url: "https://api.spoonacular.com/recipes/findByIngredients",
+        params: {
+          number: 6,
+          apiKey: process.env.SPOON_APIKEY,
+          ingredients: searchItems
+        }
+      })
+        .then(spoonData => {
+          res.send(spoonData.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     });
   });
-
-  // app.get("/api/ingredients/:id", function(req, res) {
-  //   console.log(req.body);
-  //   db.Fridge.findAll({
-  //     where: {
-  //       UserId: req.body.UserId
-  //     }
-  //   }).then(function(response) {
-  //     console.log(response);
-  //     var Arr = response.split(",");
-  //     res.send(Arr);
-  //   });
-  // });
 };

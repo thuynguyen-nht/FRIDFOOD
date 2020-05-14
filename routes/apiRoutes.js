@@ -32,7 +32,6 @@ module.exports = function(app) {
           // make new ingredient row with new User ID from new User
           .then(function(data) {
             var userData = data;
-            console.log("Data values: " + userData.dataValues.UserId);
             db.Fridge.create({
               UserId: userData.dataValues.UserId,
               ingredientName: ""
@@ -47,20 +46,8 @@ module.exports = function(app) {
 
   app.get("/api/logOut", function(req, res) {
     //req stuff
-    console.log(req.query);
     userAuth.logOut().then(function(result) {
-      console.log("User signed out");
-      // console.log(result);
       res.send(result);
     });
   });
 };
-
-// Delete an example by id
-// app.delete("/api/examples/:id", function(req, res) {
-//   db.Example.destroy({ where: { id: req.params.id } }).then(function(
-//     dbExample
-//   ) {
-//     res.json(dbExample);
-//   });
-// });

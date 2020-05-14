@@ -28,7 +28,7 @@ transporter.on("token", token => {
 // setup e-mail data with unicode symbols
 let mailOptions = {
   from: userEmail, // sender address
-  to: "angel.dlt.1996@gmail.com", // list of receivers
+  to: "", // list of receivers
   subject: "Hello ✔", // Subject line
   text: "Hello world ?", // plaintext body
   html: "<b>Hello world ?</b>", // html body
