@@ -16,7 +16,7 @@ With people being stuck in their homes during SIP, learning to find quick recipe
 
 ## Howto-for-users:
 
-1. [Click Here To Go To The App](https://secret-savannah-64609.herokuapp.com/) or go to https://secret-savannah-64609.herokuapp.com/ in your browser.
+1. [Click Here To Go To The App](https://fridfood-2020.herokuapp.com/) or go to https://secret-savannah-64609.herokuapp.com/ in your browser.
 2. Users can sign up and make an account or Log into an existing account in the top right corner of the screen. The user is authenticated via Firebase.
 3. Once logged in, the users can access the My Fridge page that will show the items that they have at home.
 4. The users can add ingredients to their fridge and the page will reload with their fridge contents showing.
