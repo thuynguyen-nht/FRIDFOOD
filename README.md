@@ -1,4 +1,4 @@
-# Project2
+# FRIDFOOD
 
 FRIDFOOD!! A  MVC app that turns whats in your fridge to food.
 
