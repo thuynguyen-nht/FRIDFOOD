@@ -25,6 +25,7 @@ With people being stuck in their homes during SIP, learning to find quick recipe
 
 ## Video of Site in Use
 [![FRIDFOOD](https://i9.ytimg.com/vi/pxMSWCXEnXU/mq2.jpg?sqp=CPTZm_oF&rs=AOn4CLDLXC4mQYerFm6gLp6s9VMdoIE9qw)](https://www.youtube.com/watch?v=pxMSWCXEnXU&t=13s)
+
 [Working App](https://drive.google.com/file/d/1xsW0vCvNWL4vkZVEz3N18k36-s7lMue6/view)
 
 ## What is happening behind the curtains:
@@ -39,6 +40,7 @@ With people being stuck in their homes during SIP, learning to find quick recipe
 2. [Express.js](https://expressjs.com/)
 3. [Handlebars.js](https://handlebarsjs.com/)
 4. [Firebase](https://firebase.google.com/)
+5. [Bootstrap](https://getbootstrap.com/)
 
 ## Authors:
 
