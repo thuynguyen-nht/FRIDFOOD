@@ -24,7 +24,7 @@ With people being stuck in their homes during SIP, learning to find quick recipe
 6. Once the user is done finding what they can make with what they have, they can logout at the top, or they will automatically log out when the window or tab closes.
 
 ## Video of Site in Use
-[![FRIDFOOD](https://i9.ytimg.com/vi/pxMSWCXEnXU/mq2.jpg?sqp=CPTZm_oF&rs=AOn4CLDLXC4mQYerFm6gLp6s9VMdoIE9qw)](https://www.youtube.com/watch?v=pxMSWCXEnXU&t=13s)
+[![FRIDFOOD](http://i3.ytimg.com/vi/pxMSWCXEnXU/maxresdefault.jpg)](https://youtu.be/pxMSWCXEnXU)
 
 [Working App](https://drive.google.com/file/d/1xsW0vCvNWL4vkZVEz3N18k36-s7lMue6/view)
 
