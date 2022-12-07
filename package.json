@@ -17,7 +17,7 @@
     "express-handlebars": "^3.1.0",
     "firebase": "^7.14.2",
     "googleapis": "^49.0.0",
-    "lint": "^0.7.0",
+    "lint": "^0.8.8",
     "mysql2": "^1.6.5",
     "nodemailer": "^6.4.6",
     "sequelize": "^5.8.6"
